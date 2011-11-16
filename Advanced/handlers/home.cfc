@@ -44,10 +44,7 @@
 				var user = populateModel("users");
 				var createuser = usergateway.createtheuser(rc);
 					
-				if(structcount(createuser) lt 2){
-					writedump("get rid of the errors");
-					abort;
-				}else{
+				if(isStruct(createuser)){
 					sessions.removeStorage();
 					//sessions.startStorage();
 					var setusername = sessions.setvar("username", createuser.getUsername());
@@ -55,7 +52,12 @@
 					var setemail = sessions.setvar("email",createuser.getEmail());
 					var setfirstname = sessions.setvar("firstname", createuser.getFirstname());
 					var setlastname = sessions.setvar("lastname", createuser.getLastname()); 
+					var setfilename = sessions.setvar("filename", createuser.getFilename()); 
 					setNextEvent("events");
+					
+				}else{
+					writedump(createuser);
+					abort;
 				}
 			
 			}else{
@@ -91,6 +93,7 @@
 					var setemail = sessions.setvar("email",getuserlogin[1].getEmail());
 					var setfirstname = sessions.setvar("firstname", getuserlogin[1].getFirstname());
 					var setlastname = sessions.setvar("lastname", getuserlogin[1].getLastname()); 
+					var setfilename = sessions.setvar("filename", getuserlogin[1].getFilename()); 
 					var setpagination = sessions.setvar("pagination", 0);
 					setNextEvent("events");
 				}

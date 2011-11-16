@@ -124,6 +124,10 @@ body{
 
 #header #signupbtn{
 	background: url(../images/btn_signup.png) no-repeat;
+	width: 68px;
+	height: 33px;
+	padding-top: 7px;
+	padding-left: 5px;
 
 }
 

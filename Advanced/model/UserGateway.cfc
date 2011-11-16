@@ -39,9 +39,7 @@ component name="UserGateway" cache="true" cacheTimeout="0"{
 		if(!ArrayIsEmpty(userfound)){
 			
 			//creating a struct of errors to be passed to the controller
-			var errors = structNew();
-			errors.email = "The user with email #rc.email# already exists";
-			return false;
+			return "The user with email #rc.email# already exists";
 			
 		}else{
 			
@@ -62,6 +60,10 @@ component name="UserGateway" cache="true" cacheTimeout="0"{
 			password = hash(setuser.getPassword() & variables.salt);
 			setuser.setPassword(password);
 			setuser.setSalt(salt);
+			//give the user a default filename
+			var filename = "default.png";
+						
+			setuser.setFilename(filename);
 			//saves the user using the ORMservice
 			var saved = user.save(setuser);
 			ORMflush();
