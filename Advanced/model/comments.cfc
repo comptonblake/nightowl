@@ -6,7 +6,7 @@ property name="user_id" column="user_id" ormtype="int";
 property name="comment" column="comment" ormtype="string";
 
 
-property name="events" type="array" fieldtype="many-to-one" cfc="events" fkcolumn="event_id";
+
 <!---
 <cffunction name="createuser" output="false" access="public" returntype="string" hint="Returns all users in the database, active and inactive.">
 

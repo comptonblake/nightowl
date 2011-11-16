@@ -131,5 +131,25 @@ component name="UserGateway" cache="true" cacheTimeout="0"{
 		}
 	}
 	
+	function getUsername( required userId )
+	{
+		var user = application.cbcontroller.getPlugin("ORMService");
+		try{
+			//writeDump( user.getPropertyNames('users') );
+			//writeDump(user.findWhere(entityName='users', {user_id=arguments.userId}));
+			
+			var thing = user.get('users', arguments.userId );
+		}catch(any e){
+			writeDump(e);
+			abort;
+		}
+	//	writeDump(thing.getUserName());
+	//	abort;	
+		return thing.getUserName();
+	}
+	
+	
+	
+	
 }
 </cfscript>

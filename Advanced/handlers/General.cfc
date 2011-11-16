@@ -1,4 +1,112 @@
-<cfcomponent output="false">	<cfscript>		this.event_cache_suffix = "";		this.prehandler_only 	= "";		this.prehandler_except 	= "";		this.posthandler_only 	= "";		this.posthandler_except = "";		this.aroundHandler_only = "";		this.aroundHandler_except = "";				/* HTTP Methods Allowed for actions. */		/* Ex: this.allowedMethods = {delete='POST,DELETE',index='GET'} */		this.allowedMethods = structnew();	</cfscript><!----------------------------------------- IMPLICIT EVENTS ------------------------------------------>
-	<!--- UNCOMMENT HANDLER IMPLICIT EVENTS	<!--- preHandler --->	<cffunction name="preHandler" returntype="void" output="false" hint="Executes before any event in this handler">		<cfargument name="event">		<cfargument name="action" hint="The intercepted action"/>		<cfargument name="eventArguments" hint="The event arguments an event is executed with (if any)"/>		<cfscript>			var rc = event.getCollection();		</cfscript>	</cffunction>	<!--- postHandler --->	<cffunction name="postHandler" returntype="void" output="false" hint="Executes after any event in this handler">		<cfargument name="event">		<cfargument name="action" 			hint="The intercepted action"/>		<cfargument name="eventArguments" 	hint="The event arguments an event is executed with (if any)"/>		<cfscript>			var rc = event.getCollection();		</cfscript>	</cffunction>		<!--- aroundHandler --->	<cffunction name="aroundHandler" returntype="void" output="false" hint="Executes around any event in this handler">		<cfargument name="event">		<cfargument name="targetAction" 	hint="The intercepted action UDF method"/>		<cfargument name="eventArguments" 	hint="The event arguments an event is executed with (if any)"/>		<cfscript>			var rc = event.getCollection();			// process targeted action			argument.targetAction(event);		</cfscript>	</cffunction>	<!--- onMissingAction --->	<cffunction name="onMissingAction" returntype="void" output="false" hint="Executes if a request action (method) is not found in this handler">		<cfargument name="event" >		<cfargument name="missingAction" 	hint="The requested action string"/>		<cfargument name="eventArguments" 	hint="The event arguments an event is executed with (if any)"/>		<cfscript>			var rc = event.getCollection();		</cfscript>	</cffunction>		<!--- onError --->	<cffunction name="onError" output="false" hint="Executes if ANY action causes an exception">		<cfargument name="event">		<cfargument name="faultAction" 		hint="The action that caused the error"/>		<cfargument name="exception"  		hint="The exception structure"/>		<cfargument name="eventArguments" 	hint="The event arguments an event is executed with (if any)"/>		<cfscript>						</cfscript>	</cffunction>	---><!------------------------------------------- PUBLIC EVENTS ------------------------------------------>
-	<!--- Default Action --->	<cffunction name="index" returntype="void" output="false" hint="My main event">		<cfargument name="event">		<cfargument name="rc">		<cfargument name="prc">		<cfset rc.welcomeMessage = "Welcome to ColdBox!">		<cfset event.setView("home")>	</cffunction>	<!--- Do Something Action --->	<cffunction name="doSomething" returntype="void" output="false" hint="Do Something">		<cfargument name="event">		<cfargument name="rc">		<cfargument name="prc">				<cfset setNextEvent("general.index")>			</cffunction><!------------------------------------------- PRIVATE EVENTS ------------------------------------------>
-</cfcomponent>
+<cfcomponent extends="coldbox.system.eventhandler" autowire="true">
+	
+	<cfproperty name="users" inject="model:users">
+	<cfproperty name="ORMService" inject="coldbox:plugin:ORMService">
+	<cfproperty name="usergateway" inject="model:UserGateway">
+	<cfproperty name="sessions" inject="coldbox:plugin:SessionStorage">
+
+	<cfscript>
+		this.event_cache_suffix = "";
+		this.prehandler_only 	= "";
+		this.prehandler_except 	= "";
+		this.posthandler_only 	= "";
+		this.posthandler_except = "";
+		this.aroundHandler_only = "";
+		this.aroundHandler_except = "";		
+		/* HTTP Methods Allowed for actions. */
+		/* Ex: this.allowedMethods = {delete='POST,DELETE',index='GET'} */
+		this.allowedMethods = structnew();
+	</cfscript>
+	
+
+
+<!------------------------------------------- PUBLIC EVENTS ------------------------------------------>
+
+	<!--- Default Action --->
+	<cffunction name="index" returntype="void" output="false" hint="My main event">
+		<cfargument name="event">
+		<cfargument name="rc">
+		<cfargument name="prc">
+<!--- 		<cfajaxproxy cfc="model.eventsgateway" jsclassname="events"> --->
+		<cfset event.setView("general/content")>
+	</cffunction>
+
+	<cffunction name="signup" returnType="void" output="false" hint="My Sign Up Event">
+		<cfargument name="event">
+		<cfargument name="rc">
+		<cfargument name="prc">
+
+		<cfscript>
+			var validateInput = usergateway.validate(rc);
+			
+			
+			if(validateInput === true){
+				var user = populateModel("users");
+				var createuser = usergateway.createtheuser(rc);
+					
+				if(structcount(createuser) lt 2){
+					writedump("get rid of the errors");
+					abort;
+				}else{
+					sessions.removeStorage();
+					//sessions.startStorage();
+					var setusername = sessions.setvar("username", createuser.getUsername());
+					var setuserid = sessions.setvar("id", createuser.getUser_id());
+					var setemail = sessions.setvar("email",createuser.getEmail());
+					var setfirstname = sessions.setvar("firstname", createuser.getFirstname());
+					var setlastname = sessions.setvar("lastname", createuser.getLastname()); 
+					setNextEvent("events");
+				}
+			
+			}else{
+				writedump("get rid of the errors");
+				abort;			
+			}
+			
+			event.setView("general/content");
+			
+			
+		</cfscript>
+	</cffunction>
+		
+	<cffunction name="login" returnType="void" output="false" hint="My login event">
+		<cfargument name="event">
+		<cfargument name="rc">
+		<cfargument name="prc">
+		
+		<cfscript>
+			var checkvalid = usergateway.validatelogin(rc);
+			
+			if(checkvalid === true){
+				var getuserlogin = usergateway.getlogininfo(rc);
+			
+				if(getuserlogin === false){
+					writedump("get rid of the errors");
+					abort;
+				}else{
+					sessions.removeStorage();
+					//sessions.startStorage();
+					var setusername = sessions.setvar("username", getuserlogin[1].getUsername());
+					var setuserid = sessions.setvar("id", getuserlogin[1].getUser_id());
+					var setemail = sessions.setvar("email",getuserlogin[1].getEmail());
+					var setfirstname = sessions.setvar("firstname", getuserlogin[1].getFirstname());
+					var setlastname = sessions.setvar("lastname", getuserlogin[1].getLastname()); 
+					var setpagination = sessions.setvar("pagination", 0);
+					setNextEvent("events");
+				}
+			
+			}else{
+				writedump("get rid of the errors");
+				abort;
+				//write for errors			
+			}
+
+			
+			
+			
+		</cfscript>
+		
+		
+	</cffunction>
+
+</cfcomponent>

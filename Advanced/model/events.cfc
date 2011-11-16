@@ -10,7 +10,7 @@ property name="description" column="description" ormtype="string";
 
 property name="users" type="array" fieldtype="one-to-many" cfc="users" fkcolumn="user_id";
 property name="invites" type="array" fieldtype="one-to-many" cfc="invites" fkcolumn="event_id";
-property name="comments" type="array" fieldtype="one-to-many" cfc="comments" fkcolumn="event_id";
+
 
 <!---
 <cffunction name="createuser" output="false" access="public" returntype="string" hint="Returns all users in the database, active and inactive.">

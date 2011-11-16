@@ -39,7 +39,7 @@
 				</cfif>
 				</div>
 			</cfoutput>
-			<cfdump var="#rc.events#">
+<!--- 			<cfdump var="#rc.events#"> --->
 			<cfset eventid = rc.events.getEvent_id()>
 			<form action="#event.buildlink('events.comment')#&id=#eventid#" method="post" id="comment">
 				<ul>
@@ -52,9 +52,20 @@
 						<input type="submit" value="Comment"/>
 					</li>
 				</ul>
-			</form> 
-			
-			</div>
+			</form> 			
+</div>
+
+<div id="comments">
+<h2>Comments</h2>
+<!--- <cfdump var="#rc.comments.getComment()#"> --->
+<cfloop array="#rc.comments#" index="i" >
+	<div class="comment">
+		<cfset index = 1>
+		<p>#i.getComment()#</p>
+	</div>
+
+</cfloop>
+</div>
 
 
 </cfoutput>

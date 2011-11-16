@@ -2,6 +2,7 @@
 		<cfproperty name="sessions" inject="coldbox:plugin:SessionStorage"/>
 		<cfproperty name="ORMService" inject="coldbox:plugin:ORMService">
 		<cfproperty name="eventsgateway" inject="model:EventsGateway"/>
+		<cfproperty name="userGateway" inject="model:userGateway"/>
 
 <cffunction name="index" returntype="any" hint="My main event">
 		<cfargument name="event">
@@ -9,18 +10,29 @@
 		<cfargument name="prc">
 		<cfscript>
 		
+		param name='rc.offset' default=0;
 		
-		/*var checklogin = sessions.getStorage();
+			var getevents = eventsgateway.getevents( rc.offset );
 			
-			if(structcount(checklogin) lt 2){
-				setNextEvent("home");
+			var allEvents = [];
+			for( ev in getevents )
+			{
+				var ent = {};
+				
+				ent.title = ev.getTitle();
+				ent.date = ev.getDate();
+				ent.time = ev.getTime();
+				ent.userId = ev.getUser_Id();
+				ent.eventId = ev.getevent_Id();
+				ent.userName = userGateway.getUsername(ev.getUser_id());
+				ent.location = ev.getLocation();
+				
+				ArrayAppend(allEvents, ent);
+				
 			}
 			
-			rc.userinfo = sessions.getStorage();*/
-
-			var getevents = eventsgateway.getevents();
+			return arguments.event.renderData(type='json', data=allEvents);
 			
-			return serializeJSON(getevents[9]);
 				
 			//return;
 				//abort;

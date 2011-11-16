@@ -89,7 +89,7 @@ body{
 /* Header styling */
 
 #header{
-	overflow: hidden;
+	//overflow: hidden;
 }
 
 #header h1{
@@ -105,6 +105,8 @@ body{
 	float: right;
 	margin-top: 25px;
 	min-height: 80px;
+	//width: 500px;
+	//position: relative;
 }
 
 #header ul li{
@@ -124,6 +126,7 @@ body{
 	overflow: hidden;
 	background: url(../images/960blur.png) no-repeat;
 	background-position: 0px 214px;
+	clear:both;
 
 }
 
@@ -196,6 +199,13 @@ body{
 #loginForm{
 	clear: both;
 }
+
+
+
+#loginForm{
+	position: absolute;
+}
+
 
 
 /* Events page css styling */

@@ -115,6 +115,14 @@
 				//throw some errors here
 			}
 			
+			var getcomments = eventsgateway.getcommentsbyevent(rc);
+			
+			if(arrayLen(getcomments) gt 1){
+				rc.comments = #getcomments#;
+			}else{
+				//throw some errors here
+			}
+			
 			event.setView("events/details");
 		</cfscript>
 </cffunction>
@@ -130,6 +138,14 @@
 			
 			if(structCount(getevent) gt 1){
 				rc.events = #getevent#;
+			}else{
+				//throw some errors here
+			}
+			
+			var getcomments = eventsgateway.getcommentsbyevent(rc);
+			
+			if(IsStruct(getcomments)){
+				rc.comments = #getcomments#;
 			}else{
 				//throw some errors here
 			}

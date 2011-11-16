@@ -7,12 +7,13 @@ $(document).ready(function(){
 		$.ajax({
 	//Online URL is 
 			type: "GET",
-			crossDomain: true,
 			data: {
 				event: 'api.index',		//Default Event Needed
+				offset: 5,
 			},
 			dataType: "json",
 			success: function(result){
+				console.log('showing the result below');
 				console.log(result);
 			},
 			error: function(results){
@@ -20,5 +21,7 @@ $(document).ready(function(){
 			},
 	});
 	};
+	
+	filter();
 
 });

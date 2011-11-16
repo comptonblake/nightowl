@@ -42,14 +42,14 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 		return saved;
 	}
 	
-	function getevents(){
+	function getevents( offset=0 ){
 		
 		//grabs the plugin for the ORM service to be written and executed
 		var event = application.cbcontroller.getPlugin("ORMService");
 		var query = "from events as e order by e.event_id ASC";
 		
 		try{
-			var events = event.findAll(query=query,max=10,offset=0);
+			var events = event.findAll(query=query,max=10, offset=arguments.offset);
 		}catch(any e){
 			writedump(e);
 			abort;
@@ -159,10 +159,10 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 	function geteventsbyid(rc){
 		
 		var events = application.cbcontroller.getPlugin("ORMService");
-		var event = rc.id;
+		var theevent = rc.id;
 		
 		try{
-			var getevent = events.findIt("from events as e where e.event_id=:id", {id=1});
+			var getevent = events.findIt("from events as e where e.event_id=:id", {id=#theevent#});
 			return getevent;
 		}catch(any e){
 			writedump(e);
@@ -191,6 +191,21 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 			writedump(e);
 			abort;
 		}	
+	}
+	
+	function getcommentsbyevent(rc){
+		
+		var events = application.cbcontroller.getPlugin("ORMService");
+		var comments = rc.id;
+		
+		try{
+			var getcomments = events.findAll("from comments as c where c.event_id = :id", {id=#comments#});
+			return getcomments;
+		}catch(any e){
+			return "There are no comments available";
+		}
+	
+	
 	}
 	
 	
