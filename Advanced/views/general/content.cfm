@@ -36,8 +36,15 @@
 <p>So why not just start today and find out how amazing this service is. It might just blow your mind.</p>
 </div>
 
+<div id="splash">
+	<div id="innerSplash">
+	
+	</div>
+</div>
+
 <div id="login">
 <h2>Login</h2>
+<!---
 <form action="#event.buildlink('home.login')#" method="post" id="loginForm">
 	<ul>
 		<li>
@@ -53,5 +60,6 @@
 		</li>
 	</ul>
 </form>
+--->
 </div>
 </cfoutput>

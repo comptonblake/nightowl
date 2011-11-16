@@ -106,7 +106,7 @@ body{
 	margin-top: 25px;
 	min-height: 80px;
 	//width: 500px;
-	//position: relative;
+	position: relative;
 }
 
 #header ul li{
@@ -117,7 +117,12 @@ body{
 	padding: 0 10px;
 }
 
-#header #signup{
+#header ul li a{
+	text-decoration: none;
+	color: #fff;
+}
+
+#header #signupbtn{
 	background: url(../images/btn_signup.png) no-repeat;
 
 }
@@ -126,7 +131,8 @@ body{
 	overflow: hidden;
 	background: url(../images/960blur.png) no-repeat;
 	background-position: 0px 214px;
-	clear:both;
+	clear:right;
+	display:none;
 
 }
 
@@ -196,15 +202,19 @@ body{
 	cursor: pointer;
 }
 
-#loginForm{
+#splash{
+	height: 225px;
+	width: 940px;
 	clear: both;
+	background-color: #5a5a5a;
+	border: 5px solid #fff;
+	
+  -webkit-box-shadow: 0px 0px 4px #000; 
+     -moz-box-shadow: 0px 0px 4px #000; 
+          box-shadow: 0px 0px 4px #000; 
 }
 
 
-
-#loginForm{
-	position: absolute;
-}
 
 
 
@@ -360,9 +370,69 @@ body{
 	clear: both;
 }
 
+/*
+#loginForm{
+	clear: both;
+}
+*/
 
 
 
+#loginForm{
+	position: absolute;
+	top: 53px;
+	right:0px;
+	width: 450px;
+	background-color: #2b2b2b;
+	height: 50px;
+	padding-bottom:5px;
+	display:none;
+	
+	
+  	-webkit-border-radius: 3px; 
+     -moz-border-radius: 3px; 
+          border-radius: 3px; 
+          
+          
+  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+  z-index: 1;
+  	
+}
+
+#loginForm ul{
+	overflow: hidden;
+	margin: 0;
+	padding-top: 5px;
+}
+
+#loginForm ul li{
+	float: left;
+}
+
+#loginForm ul li label{
+	display:block;
+	font-size:13px;
+	color: #fff;
+}
+
+#loginForm ul li input[type="text"],#loginForm ul li input[type="password"]{
+	border: 1px solid #8f8f8f;
+	height: 18px;
+
+}
+
+#loginForm ul li input[type="submit"]{
+	background: url(../images/btn_login.png) no-repeat;
+	width: 76px;
+	height: 25px;
+	border: none;
+	
+	font-family: 'Lobster13Regular';
+	color: #fff;
+	font-size: 16px;
+	margin-top: 15px;
+	cursor: pointer;
+}
 
 
 
