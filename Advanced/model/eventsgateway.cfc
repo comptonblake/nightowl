@@ -10,8 +10,8 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 			title ? "" : errors.title = "Please enter a title for your event";
 		var date = checkinputs.checkDate(form.date);
 			date ? "" : errors.date = "Please enter a correct date";
-		var locations = checkinputs.checkMinLen(form.locations, 1);
-			locations ? "" : errors.locations = "Please enter a location";
+		var location = checkinputs.checkMinLen(form.location, 1);
+			location ? "" : errors.location = "Please enter a location";
 		var description = checkinputs.checkMinLen(form.description,1);
 			description ? "" : errors.description = "Please enter a description";
 		
@@ -46,7 +46,7 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 		
 		//grabs the plugin for the ORM service to be written and executed
 		var event = application.cbcontroller.getPlugin("ORMService");
-		var query = "from events as e order by e.event_id ASC";
+		var query = "from events as e order by e.event_id DESC";
 		
 		try{
 			var events = event.findAll(query=query,max=arguments.limit, offset=arguments.offset);
@@ -165,8 +165,7 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 			var getevent = events.findIt("from events as e where e.event_id=:id", {id=#theevent#});
 			return getevent;
 		}catch(any e){
-			writedump(e);
-			abort;
+			return false;
 		}
 	
 	}

@@ -59,8 +59,13 @@
 	
 </div>
 
-<div id="login">
-<h2>Login</h2>
+<div id="sellingpoints">
+	<h2 class="eventdrivertitle">Events create themselves</h2>
+	<p class="sellingimg"><img src="includes/images/events_home.png" alt="events home"/></p>
+	<p>Events create themselves when your on our site. So easy to create it is fun.</p>
+</div>
+
+<div id="login" style="clear:both;">
 <!---
 <form action="#event.buildlink('home.login')#" method="post" id="loginForm">
 	<ul>

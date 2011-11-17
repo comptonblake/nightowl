@@ -37,12 +37,12 @@
 			</select>
 		</li>
 		<li class="floatleft">
-			<label for="locations">Location:</label>
-			<input type="text" name="locations" placeholder="Orlando, Fl."/>
+			<label for="location">Location:</label>
+			<input type="text" name="location" placeholder="Orlando, Fl."/>
 		</li>
 		<li id="formdesc">
 			<label for="email">Description:</label>
-			<textarea  name="description" placeholder="The Event Description" rows="5" cols="55"></textarea>
+			<textarea  name="description" placeholder="The Event Description" rows="5" cols="55" draggable="false"></textarea>
 		</li>
 		<li>
 			<input type="submit" value="Create Event"/>
@@ -52,14 +52,6 @@
 </div>
 
 <div id="filterevents">
-<form action="#event.buildlink('events.userposts')#" method="post" id="finduserpost">
-<ul>
-	<li>
-		<input type="submit" value="Your Events"/>
-	</li>
-</ul>
-</form>
-
 <ul>
 	<li><a href="#event.buildlink('events.userposts')#">Your Events</a></li>
 	<li><a href="#event.buildlink('events.invitedevents')#">Invited Events</a></li>
@@ -69,10 +61,12 @@
 </div>
 
 <div id="events">
+<!---
 <ul>
 	<li><a href="#event.buildlink('events.getnextevents')#" title="go to previous">Previous</a></li>
 	<li><a href="#event.buildlink('events.getnextevents')#" title="go to next">next</a></li>
 </ul>
+--->
 		<cfloop array="#rc.events#" index="i" >
 			<cfset eventid = i.getEvent_id()>
 			<cfoutput>
@@ -83,9 +77,9 @@
 				<div class="right">
 					<h3><a href="#event.buildlink('events.geteventby')#&id=#eventid#">#i.gettitle()#</a></h3>
 					<p>#i.getdescription()#</p>
-					<p>#i.getDate()#</p>
-					<p>#i.getTime()#</p>
-					<p>#i.getLocation()#</p>
+					<p class="details">#i.getDate()#</p>
+					<p class="details">#i.getTime()#</p>
+					<p class="details">#i.getLocation()#</p>
 				</div>
 				
 				

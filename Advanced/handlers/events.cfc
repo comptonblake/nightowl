@@ -125,10 +125,10 @@
 			sessions.setVar('pagination', 0);
 			var getevent = eventsgateway.geteventsbyid(rc);
 			
-			if(structCount(getevent) gt 1){
+			if(IsStruct(getevent)){
 				rc.events = #getevent#;
 			}else{
-				//throw some errors here
+				event.setView("404");
 			}
 			
 			var getcomments = eventsgateway.getcommentsbyevent(rc);
@@ -139,7 +139,13 @@
 				//throw some errors here
 			}
 			
-			event.setView("events/details");
+			if(IsStruct(getevent)){
+				event.setView("events/details");
+			}else{
+				event.setView("404");
+			}
+
+			
 		</cfscript>
 </cffunction>
 
@@ -156,17 +162,18 @@
 			
 			if(structCount(getevent) gt 1){
 				rc.events = #getevent#;
+				var getcomments = eventsgateway.getcommentsbyevent(rc);
+			
+				if(arrayLen(getcomments) gt 1){
+					rc.comments = #getcomments#;
+				}else{
+					
+				}
 			}else{
 				//throw some errors here
 			}
 			
-			var getcomments = eventsgateway.getcommentsbyevent(rc);
 			
-			if(arrayLen(getcomments) gt 1){
-				rc.comments = #getcomments#;
-			}else{
-				//throw some errors here
-			}
 			
 			event.setView("events/details");
 				

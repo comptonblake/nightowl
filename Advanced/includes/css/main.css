@@ -218,6 +218,55 @@ body{
 	cursor: pointer;
 }
 
+#accountEdit{
+	margin: 0 auto;
+	width: 300px;
+}
+
+#accountEdit ul{
+	overflow: hidden;
+}
+
+#accountEdit li{
+	//clear: both;
+	overflow: hidden;
+	padding: 5px 0 5px 0;
+}
+
+#accountEdit ul li label{
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+	width: 70px;
+	text-align: right;
+	//display: block;
+	float: left;
+	line-height: 25px;
+	margin-right: 10px;
+}
+
+#accountEdit ul li input{
+	width: 200px;
+	height: 24px;
+	border: 1px solid #5b5d5d;
+	float:left;
+}
+
+#accountEdit ul li input[type="submit"]{
+	width: 97px;
+	height: 28px;
+	background: url(../images/btn_signupnow.png) no-repeat;
+	border: none;
+	font-family: 'Lobster13Regular';
+	font-size: 15px;
+	color: #fff;
+	float: right;
+	margin-right: 15px;
+	text-shadow: 1px 1px 0px #0f7cb3;
+	cursor: pointer;
+}
+
+
 #splash{
 	height: 225px;
 	width: 940px;
@@ -227,7 +276,9 @@ body{
 	
   -webkit-box-shadow: 0px 0px 4px #000; 
      -moz-box-shadow: 0px 0px 4px #000; 
-          box-shadow: 0px 0px 4px #000; 
+          box-shadow: 0px 0px 4px #000;
+    
+    margin-bottom: 15px;  
 }
 
 
@@ -267,6 +318,10 @@ body{
 
 }
 
+#events{
+	width: 520px;
+	margin: 0 auto;
+}
 
 .event .eventimg{
 	float: left;
@@ -276,9 +331,15 @@ body{
 	font-size: 16px;
 }
 
-.event p{
+.event .right p{
 	font-size: 12px;
 	line-height: 1.2em;
+	max-height: 31px;
+	overflow: hidden;
+}
+
+.event p.details{
+	float: left;
 }
 
 .event .left{
@@ -464,6 +525,15 @@ body{
 	clear: both;
 }
 
+
+/* homepage ajaxed content */
+
+#eventdriver{
+	margin-top: 10px;
+	float: left;
+	width: 470px;
+}
+
 #eventdriver .event .detailed{
 	float: left;
 	padding: 3px 10px 0 0;
@@ -475,7 +545,92 @@ body{
 
 }
 
+#eventdriver .event{
+	width: 450px;
+	background-color: #333;
+	background: url(../images/slice_ajaxbg.png) repeat-x;
+	border: none;
+}
 
+#eventdriver .event img{
+	margin-top: 10px;
+	border: 1px solid #fff;
+  -webkit-box-shadow: 0px 0px 1px #b6b6b6; 
+     -moz-box-shadow: 0px 0px 1px #b6b6b6; 
+          box-shadow: 0px 0px 1px #b6b6b6; 
+}
+
+#eventdriver .event h3{
+	text-shadow: 1px 1px 0px #fff;
+
+}
+
+.eventdrivertitle{
+	font-family: 'Lobster13Regular';
+	font-size: 32px;
+	color: #1da0e3;
+	margin: 15px 10px 15px;
+	text-shadow: 1px 1px 0px #dcf3ff;
+}
+
+#sellingpoints{
+	float: left;
+	width: 450px;
+	margin: 0 20px;
+}
+
+#sellingpoints img{
+	border: 5px solid #fff;
+}
+
+#sellingpoints .sellingimg{
+	  -webkit-box-shadow: 0px 0px 2px #b6b6b6; 
+     -moz-box-shadow: 0px 0px 2px #b6b6b6; 
+          box-shadow: 0px 0px 2px #b6b6b6; 
+          width: 371px;
+          margin: 0 auto;
+}
+
+#sellingpoints p{
+	text-align: center;
+	font-size: 15px;
+	width: 350px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+
+
+/* comment box */
+
+
+.eventimg{
+	margin-top: 15px;
+}
+
+#comment ul li label{
+	font-family: 'Lobster13Regular';
+	font-size: 32px;
+	color: #1da0e3;
+	margin: 15px 10px 15px;
+	text-shadow: 1px 1px 0px #fff;
+	display: block;	
+}
+
+
+#comment ul li input[type="submit"]{
+	width: 97px;
+	height: 28px;
+	background: url(../images/btn_signupnow.png) no-repeat;
+	border: none;
+	font-family: 'Lobster13Regular';
+	font-size: 15px;
+	color: #fff;
+	float: right;
+	text-shadow: 1px 1px 0px #0f7cb3;
+	cursor: pointer; 
+	margin-top: 10px;
+}
 
 
 

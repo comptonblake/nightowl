@@ -1,12 +1,12 @@
 <cfoutput>
 <div id="eventcreate">
-<h2>Create an Event</h2>
+<h2>Edit your account</h2>
 <cfif structKeyExists(rc,"accounterrors")>
 <cfloop collection="#rc.accounterrors#" item="i">
 	<h3 class="errors">#rc.accounterrors['#i#']#</h3>
 </cfloop>
 </cfif>
-<form action="#event.buildlink('account.editinfo')#" enctype="multipart/form-data" method="post" id="signupForm">
+<form action="#event.buildlink('account.editinfo')#" enctype="multipart/form-data" method="post" id="accountEdit">
 	<ul>
 		<li>
 			<label for="firstname">First Name:</label>
