@@ -97,26 +97,9 @@
 <cfscript>
 		sessions.setVar('pagination', 0);
 		var uninviteuser = eventsgateway.uninviteuser(rc,sessions.getStorage());
+		setNextEvent("events");
 </cfscript>	
 </cffunction>
-
-<!---
-<cffunction name="getnextevents" returnType="void" output="false" hint="Get the next ten events">
-	<cfargument name="event">
-	<cfargument name="rc">
-	<cfargument name="prc">
-	<cfscript>
-		var reset = sessions.setVar('pagination', 0);
-		var gotonext = eventsgateway.getnextevents(rc,sessions.getStorage());
-		var increase = sessions.getVar("pagination");
-		increase += 10;
-		var setpagination = sessions.setvar("pagination", increase);
-		
-		rc.events = gotonext;
-		event.setView("events/content");
-	</cfscript>
-</cffunction>
---->
 <cffunction name="geteventby" returnType="void" output="false" hint="Get the post details by id">
 		<cfargument name="event">
 		<cfargument name="rc">

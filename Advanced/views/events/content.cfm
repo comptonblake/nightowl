@@ -67,13 +67,15 @@
 	<li><a href="#event.buildlink('events.getnextevents')#" title="go to next">next</a></li>
 </ul>
 --->
-		<cfdump var="#rc.events#">
+		
 		<cfloop array="#rc.events#" index="i" >
 			<cfset eventid = i.getEvent_id()>
 			<cfoutput>
+			<cfset user="#i.getUsers()#">
+			<cfset image = "#user[1].getFilename()#">
 				<div class="event">
 				<div class="left">
-					<p class="eventimg"><img src="includes/images/coldbox.png" /></p>
+					<p class="eventimg"><img src="includes/images/users/#image#" /></p>
 				</div>
 				<div class="right">
 					<h3><a href="#event.buildlink('events.geteventby')#&id=#eventid#">#i.gettitle()#</a></h3>
@@ -117,7 +119,7 @@
 		</cfloop>
 		
 		
-		<h1><a href="#event.buildlink('events.loadmore')#">LOAD MORE EVENTS</a></h1>
+		<p class="loadmore"><a href="#event.buildlink('events.loadmore')#">LOAD MORE EVENTS</a></p>
 		
 		<!---
 for(item in rc.events){

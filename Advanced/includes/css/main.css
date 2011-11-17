@@ -526,6 +526,26 @@ body{
 	clear: both;
 }
 
+#events .loadmore{
+	width: 186px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+#events .loadmore a{
+	display: block;
+	text-decoration: none;
+	width: 186px;
+	height: 30px;
+	font-family: 'Lobster13Regular';
+	font-size: 15px;
+	color: #fff;
+	text-align: center;
+	padding-top: 5px;
+	text-shadow: 1px 1px 0px #0f7cb3;
+	background: url(../images/btn_loadmore.png) no-repeat;
+}
+
 
 /* homepage ajaxed content */
 
