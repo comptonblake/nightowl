@@ -107,6 +107,10 @@ http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbConfigGuide
 			<Folder>tags</Folder>
 		</Layout>
 		-->
+  		<--D<eclare XML layout for use with feeds-->
+  		<Layout file="Layout.xml.cfm" name="xml">
+   		 	<View>vwDisplayFeed</View>
+ 		</Layout>
 	</Layouts>
 
 	<Interceptors>
