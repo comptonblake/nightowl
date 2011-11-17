@@ -42,7 +42,7 @@
 		</li>
 		<li id="formdesc">
 			<label for="email">Description:</label>
-			<textarea  name="description" placeholder="The Event Description" rows="5" cols="55" draggable="false"></textarea>
+			<textarea  name="description" placeholder="The Event Description" rows="5" cols="55" ></textarea>
 		</li>
 		<li>
 			<input type="submit" value="Create Event"/>
@@ -67,6 +67,7 @@
 	<li><a href="#event.buildlink('events.getnextevents')#" title="go to next">next</a></li>
 </ul>
 --->
+		<cfdump var="#rc.events#">
 		<cfloop array="#rc.events#" index="i" >
 			<cfset eventid = i.getEvent_id()>
 			<cfoutput>

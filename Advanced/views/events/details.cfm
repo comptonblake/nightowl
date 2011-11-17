@@ -1,8 +1,7 @@
 <cfoutput>
-<h2>This should be working properly :)</h2>
 <div id="events">
 			<cfoutput>
-				<div class="event">
+				<div class="event" id="eventdetails">
 				<div class="left">
 					<p class="eventimg"><img src="includes/images/users/#session.cbStorage.filename#" /></p>
 				</div>
@@ -56,7 +55,7 @@
 </div>
 
 <div id="comments">
-<h2>Comments</h2>
+<h2>Users Comments</h2>
 <!--- <cfdump var="#rc.comments.getComment()#"> --->
 <cfif structKeyExists(rc,"comments")>
 <cfloop array="#rc.comments#" index="i" >

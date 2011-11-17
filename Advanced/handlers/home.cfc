@@ -85,8 +85,10 @@
 				var getuserlogin = usergateway.getlogininfo(rc);
 			
 				if(getuserlogin === false){
-					writedump("get rid of the errors");
-					abort;
+					errors = structnew();
+					errors.nothing = "Please enter your correct password";
+					rc.loginerrors = errors;
+					event.setView("general/content");
 				}else{
 					sessions.removeStorage();
 					//sessions.startStorage();

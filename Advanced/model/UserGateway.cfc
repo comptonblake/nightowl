@@ -125,6 +125,7 @@ component name="UserGateway" cache="true" cacheTimeout="0"{
 			if(password == answer){
 				
 				return userfound;
+				
 			}else{
 			
 				return false;
