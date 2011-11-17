@@ -1,6 +1,19 @@
 <cfoutput>
 
+
+<cfif structKeyExists(rc,"signuperrors")>
+<div id="signup" style="display:block">
+<cfloop collection="#rc.signuperrors#" item="i">
+	<h3 class="errors">#rc.signuperrors['#i#']#</h3>
+</cfloop>
+	<!---
+<cfdump var="#rc#">
+	<cfdump var="#rc.signuperrors#">
+--->
+<!--- 	<h3 class="errors">#rc.signuperrors#</h3> --->
+<cfelse>
 <div id="signup">
+</cfif>
 
 <form action="#event.buildlink('home.signup')#" method="post" id="signupForm">
 	<ul>
@@ -42,6 +55,10 @@
 	</div>
 </div>
 
+<div id="eventdriver">
+	
+</div>
+
 <div id="login">
 <h2>Login</h2>
 <!---
@@ -62,4 +79,5 @@
 </form>
 --->
 </div>
+<script src="includes/javascript/api.js" type="text/javascript"></script>
 </cfoutput>

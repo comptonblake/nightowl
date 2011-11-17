@@ -45,7 +45,7 @@
 				var createuser = usergateway.createtheuser(rc);
 					
 				if(isStruct(createuser)){
-					sessions.removeStorage();
+					sessions.clearAll();
 					//sessions.startStorage();
 					var setusername = sessions.setvar("username", createuser.getUsername());
 					var setuserid = sessions.setvar("id", createuser.getUser_id());
@@ -56,13 +56,15 @@
 					setNextEvent("events");
 					
 				}else{
-					writedump(createuser);
-					abort;
+					errors = structnew();
+					errors.nothing = createuser;
+					rc.signuperrors = errors;
+					event.setView("general/content");
 				}
 			
 			}else{
-				writedump("get rid of the errors");
-				abort;			
+				rc.signuperrors = validateInput;
+				event.setView("general/content");			
 			}
 			
 			event.setView("general/content");
@@ -99,17 +101,52 @@
 				}
 			
 			}else{
-				writedump("get rid of the errors");
-				abort;
+				rc.loginerrors = checkvalid;
+				event.setView("general/content");
 				//write for errors			
 			}
-
-			
-			
-			
 		</cfscript>
-		
-		
 	</cffunction>
+	
+	
+	
+	<cffunction name="logout" returnType="void" output="false" hint="My logout event">
+		<cfargument name="event">
+		<cfargument name="rc">
+		<cfargument name="prc">
+		
+		<cfscript>
+			sessions.clearAll();
+			setNextEvent("home");
+		</cfscript>
+	</cffunction>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </cfcomponent>

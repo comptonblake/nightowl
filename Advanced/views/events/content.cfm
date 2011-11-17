@@ -2,6 +2,13 @@
 
 <div id="eventcreate">
 <h2>Create an Event</h2>
+
+<cfif structKeyExists(rc,"createerrors")>
+<cfloop collection="#rc.createerrors#" item="i">
+	<h3 class="errors">#rc.createerrors['#i#']#</h3>
+</cfloop>
+</cfif>
+
 <form action="#event.buildlink('events.createevent')#" method="post" id="createevent">
 	<ul>
 		<li>
@@ -52,6 +59,13 @@
 	</li>
 </ul>
 </form>
+
+<ul>
+	<li><a href="#event.buildlink('events.userposts')#">Your Events</a></li>
+	<li><a href="#event.buildlink('events.invitedevents')#">Invited Events</a></li>
+	<li><a href="#event.buildlink('events.alleventsview')#">View All Events</a></li>
+</ul>
+
 </div>
 
 <div id="events">
@@ -60,7 +74,6 @@
 	<li><a href="#event.buildlink('events.getnextevents')#" title="go to next">next</a></li>
 </ul>
 		<cfloop array="#rc.events#" index="i" >
-<!--- 			<cfdump var="#i.hasInvites()#"> --->
 			<cfset eventid = i.getEvent_id()>
 			<cfoutput>
 				<div class="event">
@@ -74,7 +87,12 @@
 					<p>#i.getTime()#</p>
 					<p>#i.getLocation()#</p>
 				</div>
-				<cfif #i.hasInvites()# eq false>
+				
+				
+				<cfset blah = getModel('eventsgateway')>
+				<cfset inviteexists  = blah.checkinvite(#session.cbStorage.id#,i.getEvent_id())>
+				
+				<cfif ArrayIsEmpty(#inviteexists#)>
 					<form action="#event.buildlink('events.userinvite')#" method="post" id="invite">
 						<ul>
 							<li>
@@ -87,23 +105,24 @@
 					</form>
 				<cfelse>
 					<form action="#event.buildlink('events.useruninvited')#" method="post" id="invite">
-						<ul>
-							<li>
-								<input type="hidden" name="eventId" value="#i.getEvent_id()#"/>
-							</li>
-							<li>
-								<input type="submit" value="Not Going"/>
-							</li>
-						</ul>
-					</form>
-
+							<ul>
+								<li>
+									<input type="hidden" name="eventId" value="#i.getEvent_id()#"/>
+								</li>
+								<li>
+									<input type="submit" value="Not Going"/>
+								</li>
+							</ul>
+						</form>
 				</cfif>
-				</div>
+				
+			</div>
 			</cfoutput>
 			
 		</cfloop>
 		
 		
+		<h1><a href="#event.buildlink('events.loadmore')#">LOAD MORE EVENTS</a></h1>
 		
 		<!---
 for(item in rc.events){

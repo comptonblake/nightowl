@@ -11,21 +11,25 @@
 		<cfscript>
 		
 		param name='rc.offset' default=0;
+		param name="rc.limit" default = 10;
 		
-			var getevents = eventsgateway.getevents( rc.offset );
+			var getevents = eventsgateway.getevents( rc.offset, rc.limit );
 			
 			var allEvents = [];
+			
+			
 			for( ev in getevents )
 			{
 				var ent = {};
-				
 				ent.title = ev.getTitle();
 				ent.date = ev.getDate();
 				ent.time = ev.getTime();
 				ent.userId = ev.getUser_Id();
 				ent.eventId = ev.getevent_Id();
+				ent.description = ev.getDescription();
 				ent.userName = userGateway.getUsername(ev.getUser_id());
 				ent.location = ev.getLocation();
+				ent.filename = userGateway.getFilename(ev.getUser_id());
 				
 				ArrayAppend(allEvents, ent);
 				

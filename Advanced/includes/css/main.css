@@ -92,20 +92,32 @@ body{
 	//overflow: hidden;
 }
 
+#signup h3.errors{
+	color: #dc3522;
+	font-size: 14px;
+	padding: 2px;
+	margin: 0;
+}
+
 #header h1{
 	float: left;
+	width: 170px;
+	height: 42px;
+	margin-top: 20px;
+}
+
+#header h1 a{
 	background: url(../images/logo.png) no-repeat;
+	display: block;
 	width: 170px;
 	height: 42px;
 	text-indent: -999999px;
-	margin-top: 20px;
 }
 
 #header ul{
 	float: right;
 	margin-top: 25px;
 	min-height: 80px;
-	//width: 500px;
 	position: relative;
 }
 
@@ -438,8 +450,30 @@ body{
 	cursor: pointer;
 }
 
+#loginForm .loginerrors{
+	font-family: 'Cabin';
+	font-size: 12px;
+	float: left;
+}
 
+#eventcreate{
+	clear: both;
+}
 
+#events{
+	clear: both;
+}
+
+#eventdriver .event .detailed{
+	float: left;
+	padding: 3px 10px 0 0;
+}
+
+#eventdriver .event .descript{
+	height: 31px;
+	overflow: hidden;
+
+}
 
 
 

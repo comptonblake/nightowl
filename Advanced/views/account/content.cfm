@@ -1,6 +1,11 @@
 <cfoutput>
 <div id="eventcreate">
 <h2>Create an Event</h2>
+<cfif structKeyExists(rc,"accounterrors")>
+<cfloop collection="#rc.accounterrors#" item="i">
+	<h3 class="errors">#rc.accounterrors['#i#']#</h3>
+</cfloop>
+</cfif>
 <form action="#event.buildlink('account.editinfo')#" enctype="multipart/form-data" method="post" id="signupForm">
 	<ul>
 		<li>
@@ -20,7 +25,7 @@
 			<input type="file" name="filename" value="find your file"/>
 		</li>
 		<li>
-			<input type="submit" value="Sign Up"/>
+			<input type="submit" value="Edit Account"/>
 		</li>
 	</ul>
 </form>

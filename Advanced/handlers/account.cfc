@@ -31,11 +31,12 @@
 		if(structCount(validateinfo) lt 1){
 			var saveuserinfo = accountgateway.updateuserinfo(rc, sessions.getStorage());
 		}else{
-			//display errors here please!
+			rc.accounterrors = validateinfo;
+			event.setView("account/content");
 		}
 		
 		rc.userinfo = sessions.getStorage();
-		event.setView("account/content");
+		setNextEvent("events");
 	</cfscript>	
 		
 

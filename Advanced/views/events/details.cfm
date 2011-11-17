@@ -58,13 +58,15 @@
 <div id="comments">
 <h2>Comments</h2>
 <!--- <cfdump var="#rc.comments.getComment()#"> --->
+<cfif structKeyExists(rc,"comments")>
 <cfloop array="#rc.comments#" index="i" >
 	<div class="comment">
 		<cfset index = 1>
 		<p>#i.getComment()#</p>
 	</div>
-
 </cfloop>
+</cfif>
+
 </div>
 
 

@@ -7,20 +7,18 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 		var checkinputs = application.cbcontroller.getPlugin("Validator");
 		
 		var title = checkinputs.checkMinLen(form.title,1);
-			title ? "" : errors.title = "Please enter your first name";
+			title ? "" : errors.title = "Please enter a title for your event";
 		var date = checkinputs.checkDate(form.date);
-			date ? "" : errors.date = "Please enter your last name";
+			date ? "" : errors.date = "Please enter a correct date";
 		var locations = checkinputs.checkMinLen(form.locations, 1);
-			locations ? "" : errors.locations = "Please enter a username with at least 8 characters";
+			locations ? "" : errors.locations = "Please enter a location";
 		var description = checkinputs.checkMinLen(form.description,1);
-			description ? "" : errors.description = "Please enter a correct email address";
+			description ? "" : errors.description = "Please enter a description";
 		
 		if(structcount(errors) LT 1){
 			//createtheuser(form);
 			return true;
 		}else{
-			writedump(errors);
-			abort;
 			return errors;
 		}		
 	}
@@ -33,23 +31,25 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 		rc.user_id = session.cbStorage.id;
 		
 		//creates the user that needs to be saved and where
-		var setevent = event.new("events", rc);
+		try{
+			var setevent = event.new("events", rc);
+			var saved = event.save(setevent);
+			ORMflush();
+			return saved;
+		}catch(any e){
+			return "Your event could not be created at this time";
+		}
 		
-		
-		var saved = event.save(setevent);
-		ORMflush();
-			
-		return saved;
 	}
 	
-	function getevents( offset=0 ){
+	function getevents( offset=0 , limit = 10 ){
 		
 		//grabs the plugin for the ORM service to be written and executed
 		var event = application.cbcontroller.getPlugin("ORMService");
 		var query = "from events as e order by e.event_id ASC";
 		
 		try{
-			var events = event.findAll(query=query,max=10, offset=arguments.offset);
+			var events = event.findAll(query=query,max=arguments.limit, offset=arguments.offset);
 		}catch(any e){
 			writedump(e);
 			abort;
@@ -202,10 +202,53 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 			var getcomments = events.findAll("from comments as c where c.event_id = :id", {id=#comments#});
 			return getcomments;
 		}catch(any e){
+			
 			return "There are no comments available";
 		}
 	
 	
+	}
+	
+	function invitedevents(sessions){
+		var events = application.cbcontroller.getPlugin("ORMService");
+		var userId = sessions.id;
+		var query = "from events as e order by e.event_id ASC";
+		var getevents = event.findAll(query=query,max=10, offset=0);
+		writedump(getevents);
+		abort;
+	
+	
+	}
+	
+	function checkinvite(sessions, eventid){
+		var invites = application.cbController.getPlugin("ORMService");
+		
+		try{
+			var inviteexists = invites.findAll("from invites as i where i.user_id = :id and i.event_id = :eid", {id=#sessions#,eid=#eventid#});
+			return inviteexists;
+		}catch(any e){
+			writedump(e);
+			abort;
+			
+		}
+	}
+	
+	function loadmoreposts(sessions){
+		var loadevents = application.cbController.getPlugin("ORMService");
+		
+		var limit = sessions.pagination;
+		limit += 10;
+		
+		var query = "from events as e order by e.event_id ASC";
+		
+		try{
+			var events = loadevents.findAll(query=query,max=#limit#);
+			return events;
+		}catch(any e){
+			writedump(e);
+			abort;
+			return e;
+		}
 	}
 	
 	

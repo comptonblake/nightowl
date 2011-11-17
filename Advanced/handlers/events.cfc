@@ -13,7 +13,10 @@
 			
 			if(structcount(checklogin) lt 2){
 				setNextEvent("home");
+			}else{
+				sessions.setVar('pagination', 0);
 			}
+			
 			
 			var getevents = eventsgateway.getevents();
 			rc.events = getevents;	
@@ -28,18 +31,25 @@
 	<cfscript>
 		var validate = eventsgateway.validateevent(rc);
 		var getevents = eventsgateway.getevents();
+		sessions.setVar('pagination', 0);
 			
 		if(validate === true){
 			var saveevent = eventsgateway.createevents(rc, sessions.getStorage());
 			if(saveevent === true){
 				rc.events = getevents;
-				event.setView("events/content");
+				setNextEvent("events");
 			}else{
 				//show errors about it not saving
-				writedump("Show errors here");
-				abort;
+				rc.events = getevents;
+				errors = structnew();
+				errors.nothing = saveevent;
+				rc.createerrors = errors;
+				event.setView("events/content");
 			}
 		}else{
+			rc.events = getevents;
+			rc.createerrors = validate;
+			event.setView("events/content");
 			//display errors here
 		}
 	</cfscript>
@@ -51,7 +61,7 @@
 	<cfargument name="rc">
 	<cfargument name="prc">
 	<cfscript>
-		
+		sessions.setVar('pagination', 0);
 		var getuserevents = eventsgateway.getuserevents(rc, sessions.getStorage());
 		
 		if(arrayLen(getuserevents) gt 1){
@@ -71,11 +81,12 @@
 	<cfargument name="rc">
 	<cfargument name="prc">
 	<cfscript>
+		sessions.setVar('pagination', 0);
 		var inviteuser = eventsgateway.inviteuser(rc,sessions.getStorage());
 		var getevents = eventsgateway.getevents();
 				
 		rc.events = getevents;
-		event.setView("events/content");
+		setNextEvent("events");
 	</cfscript>	
 </cffunction>
 
@@ -84,15 +95,18 @@
 	<cfargument name="rc">
 	<cfargument name="prc">
 <cfscript>
+		sessions.setVar('pagination', 0);
 		var uninviteuser = eventsgateway.uninviteuser(rc,sessions.getStorage());
 </cfscript>	
 </cffunction>
 
+<!---
 <cffunction name="getnextevents" returnType="void" output="false" hint="Get the next ten events">
 	<cfargument name="event">
 	<cfargument name="rc">
 	<cfargument name="prc">
 	<cfscript>
+		var reset = sessions.setVar('pagination', 0);
 		var gotonext = eventsgateway.getnextevents(rc,sessions.getStorage());
 		var increase = sessions.getVar("pagination");
 		increase += 10;
@@ -102,11 +116,13 @@
 		event.setView("events/content");
 	</cfscript>
 </cffunction>
+--->
 <cffunction name="geteventby" returnType="void" output="false" hint="Get the post details by id">
 		<cfargument name="event">
 		<cfargument name="rc">
 		<cfargument name="prc">
 		<cfscript>
+			sessions.setVar('pagination', 0);
 			var getevent = eventsgateway.geteventsbyid(rc);
 			
 			if(structCount(getevent) gt 1){
@@ -133,7 +149,9 @@
 		<cfargument name="rc">
 		<cfargument name="prc">
 		<cfscript>
+			sessions.setVar('pagination', 0);
 			var comment = eventsgateway.sendcomment(rc,sessions.getStorage());
+			
 			var getevent = eventsgateway.geteventsbyid(rc);
 			
 			if(structCount(getevent) gt 1){
@@ -144,19 +162,42 @@
 			
 			var getcomments = eventsgateway.getcommentsbyevent(rc);
 			
-			if(IsStruct(getcomments)){
+			if(arrayLen(getcomments) gt 1){
 				rc.comments = #getcomments#;
 			}else{
 				//throw some errors here
 			}
-
-			event.setView("events/details");	
+			
+			event.setView("events/details");
+				
 		</cfscript>
 </cffunction>
 
+<cffunction name="invitedevents" returnType="void" output="false" hint="submit the comment that the user wants passed into the event">
+		<cfargument name="event">
+		<cfargument name="rc">
+		<cfargument name="prc">
+		<cfscript>
+		sessions.setVar('pagination', 0);
+		var getinvitedevents = eventsgateway.invitedevents(sessions.getStorage());
+		</cfscript>
+</cffunction>
 
-
-
+<cffunction name="loadmore" returnType="void" output="false" hint="submit the comment that the user wants passed into the event">
+		<cfargument name="event">
+		<cfargument name="rc">
+		<cfargument name="prc">
+		<cfscript>
+		var loadmore = eventsgateway.loadmoreposts(sessions.getStorage());
+		var increase = sessions.getStorage();
+		var update = increase.pagination += 10;
+		sessions.setVar('pagination',update);
+		
+		rc.events = loadmore;	
+		event.setView("events/content");
+		
+		</cfscript>
+</cffunction>
 
 
 

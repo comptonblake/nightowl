@@ -152,6 +152,24 @@ component name="UserGateway" cache="true" cacheTimeout="0"{
 	
 	
 	
+	function getFilename(userid){
+		var user = application.cbcontroller.getPlugin("ORMService");
+	
+		try{
+			var getevent = user.findIt("from users as e where e.user_id=:id", {id=arguments.userid});
+			
+			return getevent.getFilename();
+			
+		}catch(any e){
+			writedump(e);
+			abort;
+		
+		}
+	
+	
+	}
+	
+	
 	
 }
 </cfscript>

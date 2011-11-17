@@ -37,6 +37,7 @@ function validateuserinfo(rc){
        
         <cfscript>
         
+        
     	//grabs the plugin for the ORM service to be written and executed
 		var user = application.cbcontroller.getPlugin("ORMService");
 		
@@ -50,6 +51,7 @@ function validateuserinfo(rc){
 		}else{
 			var setfilename = theuser.setFilename(file.serverFile);
 		}
+		
 		
 		//saves the user using the ORMservice
 		ORMflush();
