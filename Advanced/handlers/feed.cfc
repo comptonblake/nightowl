@@ -12,34 +12,31 @@
 		param name='rc.offset' default=0;
 		param name="rc.limit" default = 10;
 		
-			var getevents = eventsgateway.getevents( rc.offset, rc.limit );
-			
+			var getevents = eventsgateway.getevents(rc.offset, rc.limit);
 			var allEvents = {};
 			
-			var n = 1;
 			for( ev in getevents )
 			{
 				
 					
-				 allEvents.item = ArrayNew(n); 
-       			 allEvents.item[n] = StructNew(); 
-        		allEvents.item[n].description = StructNew(); 
-       			 allEvents.item[n].description.value = ev.getTitle(); 
-       			 allEvents.item[n].link = ev.getDate(); 
-       			 allEvents.item[n].pubDate = Now(); 
-       			 allEvents.item[n].title = StructNew();
-       			 allEvents.item[n].title.value = ev.getDescription(); 
-				
-				n += 1
+				 allEvents.item = ArrayNew(1); 
+       			 allEvents.item[1] = StructNew(); 
+        		 allEvents.item[1].description = StructNew(); 
+       			 allEvents.item[1].description.value = ev.getTitle(); 
+       			 allEvents.item[1].link = ev.getDate(); 
+       			 allEvents.item[1].pubDate = Now(); 
+       			 allEvents.item[1].title = StructNew();
+       			 allEvents.item[1].title.value = ev.getDescription(); 
 			}
 			
-			  allEvents.link = "this is a link"; 
+			allEvents.link = "this is a link"; 
         	allEvents.title = "Night Owl RSS feed"; 
-        allEvents.description = "working on rss feed"; 
-        allEvents.pubDate = Now(); 
-        allEvents.version = "rss_2.0"; 
+        	allEvents.description = "working on rss feed"; 
+        	allEvents.pubDate = Now(); 
+        	allEvents.version = "rss_2.0"; 
 		
 		rc.feed = allEvents;
+		
 		event.setView("vwDisplayFeed");
 	</cfscript>
   </cffunction>

@@ -4,4 +4,7 @@
         name = "#rc.feed#" 
         outputFile = "feedTest/createRSSOutput.xml"  
         overwrite = "yes" 
-        xmlVar = "myXML"> 
+        xmlVar = "myXML">
+        
+        
+         
