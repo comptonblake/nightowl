@@ -89,9 +89,6 @@ component name="EventsGateway" cache="true" cacheTimeout="0"{
 	
 	function getuserevents(rc,session){
 		
-		writedump(rc);
-		writedump(session.cbstorage.id);
-		
 		var event = application.cbcontroller.getPlugin("ORMService");
 		var user = session.cbstorage.id;
 		var query = "from events as e where e.user_id = #user#"

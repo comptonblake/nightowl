@@ -33,6 +33,11 @@ function validateuserinfo(rc){
 	            destination = "#image#"
 	            source = "#newimage#"
 	            overwrite = "yes">
+	        <cfscript>
+	       	 var user = application.cbcontroller.getPlugin("SessionStorage");
+	       	 user.setVar('filename',file.serverFile);
+	        </cfscript>
+	            
         </cfif> 
        
         <cfscript>

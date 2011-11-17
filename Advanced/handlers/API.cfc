@@ -27,9 +27,9 @@
 				ent.userId = ev.getUser_Id();
 				ent.eventId = ev.getevent_Id();
 				ent.description = ev.getDescription();
-				ent.userName = userGateway.getUsername(ev.getUser_id());
+				//ent.userName = userGateway.getUsername(ev.getUser_id());
 				ent.location = ev.getLocation();
-				ent.filename = userGateway.getFilename(ev.getUser_id());
+				ent.filename = "default.png";
 				
 				ArrayAppend(allEvents, ent);
 				

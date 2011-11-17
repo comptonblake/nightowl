@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+	<channel>
+		<title>Night Owl RSS feed</title>
+		<link>this is a link</link>
+		<description>working on rss feed</description>
+		<pubDate>Thu, 17 Nov 2011 15:38:55 GMT</pubDate>
+		<item>
+			<title>This is getting to become a problem and I don't know why exactly</title>
+			<description>Get my events working right please</description>
+			<link>Fri, 11 Nov 2011 05:00:00 GMT</link>
+			<pubDate>Thu, 17 Nov 2011 15:38:55 GMT</pubDate>
+		</item>
+	</channel>
+</rss>

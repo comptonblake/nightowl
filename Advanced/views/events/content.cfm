@@ -51,14 +51,9 @@
 </form>
 </div>
 
-<div id="filterevents">
-<ul>
-	<li><a href="#event.buildlink('events.userposts')#">Your Events</a></li>
-	<li><a href="#event.buildlink('events.invitedevents')#">Invited Events</a></li>
-	<li><a href="#event.buildlink('events.alleventsview')#">View All Events</a></li>
-</ul>
 
-</div>
+
+
 
 <div id="events">
 <!---
@@ -71,11 +66,16 @@
 		<cfloop array="#rc.events#" index="i" >
 			<cfset eventid = i.getEvent_id()>
 			<cfoutput>
-			<cfset user="#i.getUsers()#">
-			<cfset image = "#user[1].getFilename()#">
+<!--- 			<cfset user="#i.getUsers()#"> --->
+<!--- 			<cfdump var="#rc.events#"> --->
+<!---
+			<cfset usergate = getModel(userGateway)>
+			<cfset usergate.getFilename(ev.getUser_id()>
+--->
+<!--- 			<cfset image = "#user[1].getFilename()#"> --->
 				<div class="event">
 				<div class="left">
-					<p class="eventimg"><img src="includes/images/users/#image#" /></p>
+<!--- 					<p class="eventimg"><img src="includes/images/users/#image#" /></p> --->
 				</div>
 				<div class="right">
 					<h3><a href="#event.buildlink('events.geteventby')#&id=#eventid#">#i.gettitle()#</a></h3>

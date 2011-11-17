@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<description>This is an example feed showing the very basics of what constitutes a web feed</description>
+<link>http://www.example.com</link>
+<title>ColdBox Starter Feed</title>
+<docs>http://www.rssboard.org/rss-specification</docs>
+<generator>ColdBox Feed Generator - 2.1</generator>
+</channel>
+</rss>
+
